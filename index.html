@@ -9,9 +9,42 @@
 </head>
 <body>
     
+    <div class="form-container">
+        
+        <form id="create-recipe-form" style="">
+            <h3>Add a Recipe!</h3>
+            
+            <input id='input-name' type="text" name="name" value="" placeholder="Give your recipe a name." class="input-text">
+            <br><br>
+            <textarea id='input-description' name="description" rows="8" cols="80" value="" placeholder="Tell us a little bit about this recipe."></textarea>
+            <br><br>
+            <input id='input-url' type="text" name="image" value="" placeholder="Enter the recipe's image URL here." class="input-text">
+            <br><br>
+            <p>What type of meal is this?</p>
+            <select id="meal_type" name="meal_type">
+                <option value="1">Breakfast</option>
+                <option value="2">Morning Snack</option>
+                <option value="3">Lunch</option>
+                <option value="4">Afternoon Snack</option>
+                <option value="5">Dinner</option>
+                <option value="6">Midnight Snack</option>
+            </select>
+            <br><br>
+            <textarea id='input-ingredients' name="ingredients" rows="8" cols="80" value="" placeholder="Enter in the ingredients. Separate ingredients with a ; and a space. For example: 2 eggs; 1/2 cup butter, melted; 1 cup milk"></textarea>
+            <br><br>
+            <textarea id='input-instructions' name="instructions" rows="8" cols="80" value="" placeholder="Enter in the instructions. Separate each step with a ; and a space. For example: 1. Mix the sugars, butter, and eggs.; 2. In a separate bowl, mix the dry ingredients.; 3. Slowly beat the dry ingredients with the wet ingredients."></textarea>
+            <br><br>
+        
+            <input id= 'create-button' type="submit" name="submit" value="Add New Recipe" class="submit">
+        </form>
+      
+    </div>
+
+    <br><br>
+
     <div id="recipe-container">
 
     </div>
-    
+
 </body>
 </html>
