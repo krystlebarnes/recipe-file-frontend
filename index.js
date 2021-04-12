@@ -12,19 +12,23 @@ function getRecipes() {
     .then(response => response.json())
     .then(recipes => {
         recipes.data.forEach(recipe => {
-            const recipeMarkup = `
-              <div data-id=${recipe.id}>
-                <img src=${recipe.attributes.image_url} height="200" width="250">
-                <h3>${recipe.attributes.name}</h3>
-                <p><i>Course: ${recipe.attributes.meal_type.name}</i></p>
-                <p>${recipe.attributes.description}</p>
-                <button data-id=${recipe.id}>edit</button>
-              </div>
-              <br><br>`;
-
-            document.querySelector('#recipe-container').innerHTML += recipeMarkup
+            render(recipe)
         })
     })
+}
+
+function render(recipe) {
+    const recipeMarkup = `
+        <div data-id=${recipe.id}>
+            <img src=${recipe.attributes.image_url} height="200" width="250">
+            <h3>${recipe.attributes.name}</h3>
+            <p><i>Course: ${recipe.attributes.meal_type.name}</i></p>
+            <p>${recipe.attributes.description}</p>
+            <button data-id=${recipe.id}>edit</button>
+        </div>
+        <br><br>`;
+
+    document.querySelector('#recipe-container').innerHTML += recipeMarkup
 }
 
 function createFormHandler(e) {
@@ -48,16 +52,6 @@ function postRecipe(name, description, image_url, meal_type_id, ingredients, ins
     .then(response => response.json())
     .then(recipe => {
         const recipeData = recipe.data
-        const recipeMarkup = `
-        <div data-id=${recipe.id}>
-            <img src=${recipeData.attributes.image_url} height="200" width="250">
-            <h3>${recipeData.attributes.name}</h3>
-            <p><i>Course: ${recipeData.attributes.meal_type.name}</i></p>
-            <p>${recipeData.attributes.description}</p>
-            <button data-id=${recipeData.id}>edit</button>
-        </div>
-        <br><br>`;
-  
-      document.querySelector('#recipe-container').innerHTML += recipeMarkup;
+        render(recipeData)
     })
   }
