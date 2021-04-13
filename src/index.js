@@ -12,23 +12,10 @@ function getRecipes() {
     .then(response => response.json())
     .then(recipes => {
         recipes.data.forEach(recipe => {
-            render(recipe)
+            let newRecipe = new Recipe(recipe, recipe.attributes)
+            document.querySelector('#recipe-container').innerHTML += newRecipe.renderRecipeCard()
         })
     })
-}
-
-function render(recipe) {
-    const recipeMarkup = `
-        <div data-id=${recipe.id}>
-            <img src=${recipe.attributes.image_url} height="200" width="250">
-            <h3>${recipe.attributes.name}</h3>
-            <p><i>Course: ${recipe.attributes.meal_type.name}</i></p>
-            <p>${recipe.attributes.description}</p>
-            <button data-id=${recipe.id}>edit</button>
-        </div>
-        <br><br>`;
-
-    document.querySelector('#recipe-container').innerHTML += recipeMarkup
 }
 
 function createFormHandler(e) {
