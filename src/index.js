@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const createRecipeForm = document.querySelector('#create-recipe-form')
     createRecipeForm.addEventListener('submit', (e) => createFormHandler(e))
+    
+    const recipeContainer = document.querySelector('#recipe-container')
+    recipeContainer.addEventListener('click', e => {
+        const recipe = Recipe.findById(e.target.dataset.id);
+        document.querySelector('#update-recipe').innerHTML = recipe.renderUpdateForm();
+    });
 })
 
 function getRecipes() {
