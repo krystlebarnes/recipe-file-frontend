@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const recipe = Recipe.findById(e.target.dataset.id);
         document.querySelector('#update-recipe').innerHTML = recipe.renderUpdateForm();
     });
+
+    document.querySelector('#update-recipe').addEventListener('submit', e => updateFormHandler(e))
 })
 
 function getRecipes() {
@@ -48,3 +50,29 @@ function postRecipe(name, description, image_url, meal_type_id, ingredients, ins
         render(recipeData)
     })
   }
+
+  function UpdateFormHandler(e) {
+    e.preventDefault()
+    const recipe = Recipe.findById(e.target.dataset.id); 
+    const name = e.target.querySelector('#input-name').value;
+    const description = e.target.querySelector('#input-description').value;
+    const image_url = e.target.querySelector('#input-url').value;
+    const mealTypeId = parseInt(e.target.querySelector('#meal_type').value);
+    const ingredients = e.target.querySelector('#input-ingredients').value;
+    const instructions = e.target.querySelector('#input-instructions').value;
+    patchRecipe(recipe, name, description, image_url, mealTypeId, ingredients, instructions)
+}
+
+// function patchRecipe(recipe, name, description, image_url, meal_type_id, ingredients, instructions) {
+//     const bodyData = {recipe, name, description, image_url, meal_type_id, ingredients, instructions}
+//     fetch("http://localhost:3000/api/v1/recipes/${recipe.id}", {
+//         method: "PATCH",
+//         headers: {
+//             "Content-Type": "application/json",
+//             Accept: "application/json"
+//         },
+//         body: JSON.stringify(bodyData)
+//     })
+//     .then(response => response.json())
+//     .then(updatedRecipe => console.log(render(updatedRecipe.data)))
+// }
