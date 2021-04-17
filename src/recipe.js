@@ -10,7 +10,7 @@ class Recipe {
         Recipe.all.push(this)
     }
 
-    function renderRecipeCard() {
+    renderRecipeCard() {
         return `
             <div data-id=${this.id}>
                 <img src=${this.image_url} height="200" width="250">

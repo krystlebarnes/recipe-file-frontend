@@ -39,6 +39,7 @@ function postRecipe(name, description, image_url, meal_type_id, ingredients, ins
     .then(response => response.json())
     .then(recipe => {
         const recipeData = recipe.data
-        render(recipeData)
+        let newRecipe = new Recipe(recipeData, recipeData.attributes)
+            document.querySelector('#recipe-container').innerHTML += newRecipe.renderRecipeCard()
     })
   }
