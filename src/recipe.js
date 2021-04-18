@@ -56,7 +56,14 @@ class Recipe {
             </form>`;
     }
 
-
+    update({name, image_url, description, ingredients, instructions, meal_type}) {
+        this.name = name;
+        this.image_url = image_url;
+        this.description = description;
+        this.ingredients = ingredients;
+        this.instructions = instructions;
+        this.meal_type = meal_type;
+    }
 }
 
 Recipe.all = [];
