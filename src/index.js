@@ -122,5 +122,6 @@ function patchRecipe(recipe, name, description, image_url, meal_type_id, ingredi
         recipe.update(updatedRecipe.data.attributes);
         document.querySelector('#recipe-container').innerHTML = '';
         Recipe.all.forEach(recipe => document.querySelector('#recipe-container').innerHTML += recipe.renderRecipeCard());
+        document.querySelector('#update-recipe').innerHTML = '';
     })
 }
