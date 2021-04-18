@@ -3,15 +3,24 @@ const endPoint = "http://localhost:3000/api/v1/recipes"
 document.addEventListener('DOMContentLoaded', () => {
     getRecipes()
 
-    const createRecipeForm = document.querySelector('#create-recipe-form')
-    createRecipeForm.addEventListener('submit', (e) => createFormHandler(e))
+    //click to add new recipe
+    const addForm = document.querySelector('#add-form')
+    addForm.addEventListener('click', e => {
+        document.querySelector('#add-form').innerHTML = "";
+        document.querySelector('#create-recipe-form').innerHTML = renderCreateForm();
+    })
+
+    //submit new recipe form
+    document.querySelector('#create-recipe-form').addEventListener('submit', (e) => createFormHandler(e))
     
+    //click to edit recipe
     const recipeContainer = document.querySelector('#recipe-container')
     recipeContainer.addEventListener('click', e => {
         const recipe = Recipe.findById(e.target.dataset.id);
         document.querySelector('#update-recipe').innerHTML = recipe.renderUpdateForm();
     });
 
+    //submit updated recipe
     document.querySelector('#update-recipe').addEventListener('submit', e => updateFormHandler(e))
 })
 
@@ -24,6 +33,36 @@ function getRecipes() {
             document.querySelector('#recipe-container').innerHTML += newRecipe.renderRecipeCard()
         })
     })
+}
+
+function renderCreateForm() {
+    return `
+        <form id="create-recipe-form" style="">
+            <h3>ADD A RECIPE</h3>
+            
+            <input id='input-name' type="text" name="name" value="" placeholder="Give your recipe a name." class="input-text">
+            <br><br>
+            <input id='input-url' type="text" name="image" value="" placeholder="Enter the recipe's image URL here." class="input-text">
+            <br><br>
+            <textarea id='input-description' name="description" rows="8" cols="80" value="" placeholder="Tell us a little bit about this recipe."></textarea>
+            <br><br>
+            <p>What type of meal is this?</p>
+            <select id="meal_type" name="meal_type">
+                <option value="1">Breakfast</option>
+                <option value="2">Morning Snack</option>
+                <option value="3">Lunch</option>
+                <option value="4">Afternoon Snack</option>
+                <option value="5">Dinner</option>
+                <option value="6">Midnight Snack</option>
+            </select>
+            <br><br>
+            <textarea id='input-ingredients' name="ingredients" rows="8" cols="80" value="" placeholder="Enter each ingredient on a separate line."></textarea>
+            <br><br>
+            <textarea id='input-instructions' name="instructions" rows="8" cols="80" value="" placeholder="Enter each instruction on a separate line."></textarea>
+            <br><br>
+        
+            <input id= 'create-button' type="submit" name="submit" value="Add New Recipe" class="submit">
+        </form>`;
 }
 
 function createFormHandler(e) {
@@ -48,7 +87,9 @@ function postRecipe(name, description, image_url, meal_type_id, ingredients, ins
     .then(recipe => {
         const recipeData = recipe.data
         let newRecipe = new Recipe(recipeData, recipeData.attributes)
-        document.querySelector('#recipe-container').innerHTML += newRecipe.renderRecipeCard()
+        document.querySelector('#recipe-container').innerHTML += newRecipe.renderRecipeCard();
+        document.querySelector('#create-recipe-form').innerHTML = "";
+        document.querySelector('#add-form').innerHTML = `<button id="add-button">ADD A RECIPE</button>`;
     })
 }
 
