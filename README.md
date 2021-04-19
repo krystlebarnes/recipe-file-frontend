@@ -23,9 +23,9 @@ open index.html
 
 ## How to Use
 
-Click the "ADD A RECIPE" button at the top to add a new recipe to your recipe list.
+Click the `ADD A RECIPE` button at the top to add a new recipe to your recipe list.
 
-To edit a recipe, click the "edit" button under the recipe you would like to edit. An edit form will appear at the top of the page.
+To edit a recipe, click the `edit` button under the recipe you would like to edit. An edit form will appear at the top of the page.
 
 ## Features for Future Versions
 * View a full recipe
